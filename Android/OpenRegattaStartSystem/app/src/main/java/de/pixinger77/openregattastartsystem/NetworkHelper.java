@@ -30,6 +30,8 @@ import java.util.concurrent.ExecutionException;
 
 public class NetworkHelper {
 
+    static final String SERVER_NAME = "192.168.4.1";
+
     // region public interface IRequestResultStatus
     public interface IRequestResultStatus {
         void OnRequestSucceeded(Status status);
@@ -160,7 +162,7 @@ public class NetworkHelper {
     }
 
     public void RequestStatus(final IRequestResultStatus iRequestResult) {
-        String url = "http://192.168.1.1/ReqState";
+        String url = "http://" + SERVER_NAME + "/";
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest(
                 Request.Method.GET,
@@ -224,7 +226,7 @@ public class NetworkHelper {
     }
 
     public void RequestStart(int classFlagId, int prepareMinutes, int countdownMinutes, final IRequestResult iRequestResult) {
-        String url = "http://192.168.1.1/Start/" + classFlagId + "/" + prepareMinutes + "/" + countdownMinutes;
+        String url = "http://" + SERVER_NAME + "/Start?cf=" + classFlagId + "&pm=" + prepareMinutes + "&cm=" + countdownMinutes;
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest(
                 Request.Method.GET,
@@ -247,7 +249,7 @@ public class NetworkHelper {
     }
 
     public void RequestReset(final IRequestResult iRequestResult) {
-        String url = "http://192.168.1.1/Reset";
+        String url = "http://" + SERVER_NAME + "/Reset";
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest(
                 Request.Method.GET,
@@ -270,7 +272,7 @@ public class NetworkHelper {
     }
 
     public void RequestEmergency(final IRequestResult iRequestResult) {
-        String url = "http://192.168.1.1/Emergency";
+        String url = "http://" + SERVER_NAME + "/Emergency";
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest(
                 Request.Method.GET,
@@ -293,7 +295,7 @@ public class NetworkHelper {
     }
 
     public void RequestAbortSingle(final IRequestResult iRequestResult) {
-        String url = "http://192.168.1.1/AbortSingle";
+        String url = "http://" + SERVER_NAME + "/AbortSingle";
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest(
                 Request.Method.GET,
@@ -316,7 +318,7 @@ public class NetworkHelper {
     }
 
     public void RequestAbortAll(final IRequestResult iRequestResult) {
-        String url = "http://192.168.1.1/AbortAll";
+        String url = "http://" + SERVER_NAME + "/AbortAll";
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest(
                 Request.Method.GET,
@@ -338,7 +340,7 @@ public class NetworkHelper {
         this.queue.add(jsonRequest);
     }
     public void RequestAbort(final IRequestResult iRequestResult) {
-        String url = "http://192.168.1.1/Abort";
+        String url = "http://" + SERVER_NAME + "/Abort";
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest(
                 Request.Method.GET,
