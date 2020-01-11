@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Fragment_State04_Started">
+
+
+    <TextView
+        android:id="@+id/txtPrepareTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Started"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+    <TextView
+        android:id="@+id/txtTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Time"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+    <TextView
+        android:id="@+id/txtTimer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display3" />
+
+    <Button
+        android:id="@+id/btnAbortSingle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/SignalAbortSingle" />
+
+    <Button
+        android:id="@+id/btnAbortAll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/SignalAbortAll" />
+
+    <Button
+        android:id="@+id/btnAbort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/SignalAbort" />
+
+    <View
+        android:id="@+id/viewSpacer4"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@android:color/holo_red_light" />
+
+    <Button
+        android:id="@+id/btnReset"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ResetSetup"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Update"
+        android:textColor="@color/colorPrimary" />
+
+
+</LinearLayout>

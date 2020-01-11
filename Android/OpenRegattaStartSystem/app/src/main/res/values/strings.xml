@@ -1,0 +1,51 @@
+<resources>
+    <string name="hello_blank_fragment">hello_blank_fragment:</string>
+    <string name="app_name">OpenRegattaStartSystem</string>
+    <string name="action_settings">Settings</string>
+    <string name="ClassFlag">Klassen-Fahne</string>
+    <string name="StartFlag">Start-Fahne</string>
+    <string name="PrepareTime">Vorlaufzeit</string>
+    <string name="Countdown">Startzeit</string>
+    <string name="Time">Zeit</string>
+    <string name="Start">Start</string>
+    <string name="Started">Gestartet</string>
+    <string name="Disconnected">Verbindung getrennt</string>
+    <string name="SearchingStartMachine">Suche Start-Automat (bitte warten...)</string>
+    <string name="Connect">Verbinden</string>
+    <string name="Reset">Zurücksetzen</string>
+    <string name="ResetSetup">Zurück (zum Setup)</string>
+    <string name="Setup">Setup</string>
+    <string name="SignalAbort">Signal: Abbruch</string>
+    <string name="SignalAbortSingle">Signal: Rückruf (einzel)</string>
+    <string name="SignalAbortAll">Signal: Rückruf (allgemein)</string>
+    <string name="Update">Aktualisieren</string>
+
+    <string-array name="spinnerItems_ClassFlag">
+        <item>Offen</item>
+        <item>Optimist</item>
+        <item>Ixylon</item>
+    </string-array>
+    <string-array name="spinnerItems_PrepareTime">
+        <item>1 Minute</item>
+        <item>2 Minuten</item>
+        <item>3 Minuten</item>
+        <item>4 Minuten</item>
+        <item>5 Minuten</item>
+        <item>6 Minuten</item>
+        <item>7 Minuten</item>
+        <item>8 Minuten</item>
+        <item>9 Minuten</item>
+        <item>10 Minuten</item>
+    </string-array>
+    <string-array name="spinnerItems_CountdownTime">
+        <item>2 Minuten</item>
+        <item>3 Minuten</item>
+        <item>4 Minuten</item>
+        <item>5 Minuten</item>
+        <item>6 Minuten</item>
+        <item>7 Minuten</item>
+        <item>8 Minuten</item>
+        <item>9 Minuten</item>
+        <item>10 Minuten</item>
+    </string-array>
+</resources>
