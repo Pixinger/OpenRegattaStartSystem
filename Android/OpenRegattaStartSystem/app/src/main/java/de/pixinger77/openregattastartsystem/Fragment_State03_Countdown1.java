@@ -42,12 +42,9 @@ public class Fragment_State03_Countdown1 extends Fragment_Base {
         txtTimer.setText("");
 
         // ClassFlag
-        int selectedClassFlag = _FragmentBaseListener.getStateMachine().getSelectedClassFlag();
+        ClassFlags selectedClassFlag = _FragmentBaseListener.getStateMachine().getSelectedClassFlag();
         ImageView imgClassFlag = view.findViewById(R.id.imgClassFlag);
-        if (selectedClassFlag == 0)
-            imgClassFlag.setImageResource(R.mipmap.ic_flag_class_opti);
-        else
-            imgClassFlag.setImageResource(R.mipmap.ic_flag_class_opti);
+        imgClassFlag.setImageResource(selectedClassFlag.getRessourceId());
 
         // btnAbort
         Button btnAbort = view.findViewById(R.id.btnAbort);

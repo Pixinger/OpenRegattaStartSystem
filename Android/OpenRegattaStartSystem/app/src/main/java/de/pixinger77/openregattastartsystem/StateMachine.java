@@ -24,7 +24,7 @@ public class StateMachine {
     }
     // endregion
 
-    private int _SelectedClassFlag = 0;
+    private ClassFlags _SelectedClassFlag = ClassFlags.Open;
 
     private States currentState = States.Unknown;
     private Fragment_Base currentFragment = null;
@@ -147,12 +147,12 @@ public class StateMachine {
             }
         });
     }
-    public void requestStart(final int classFlagId, final int prepareMinutes, final int countdownMinutes) {
+    public void requestStart(final ClassFlags classFlag, final int prepareMinutes, final int countdownMinutes) {
         Log.d("PIX","this.networkHelper.requestStart");
-        this.networkHelper.RequestStart(classFlagId, prepareMinutes, countdownMinutes, new NetworkHelper.IRequestResult() {
+        this.networkHelper.RequestStart(classFlag.getValue(), prepareMinutes, countdownMinutes, new NetworkHelper.IRequestResult() {
             @Override
             public void OnRequestSucceeded() {
-                _SelectedClassFlag = classFlagId;
+                _SelectedClassFlag = classFlag;
                 SetState(States.State_01_Prepare);
             }
 
@@ -250,5 +250,5 @@ public class StateMachine {
             }
         });
     }
-    public int getSelectedClassFlag() { return _SelectedClassFlag; }
+    public ClassFlags getSelectedClassFlag() { return _SelectedClassFlag; }
 }

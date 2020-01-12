@@ -44,10 +44,10 @@ public class Fragment_State00_Setup extends Fragment_Base {
         Button btnStart = view.findViewById(R.id.btnStart);
         btnStart.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                int cf = spinnerClassFlag.getSelectedItemPosition();
+                ClassFlags classFlag = ClassFlags.valueOf(spinnerClassFlag.getSelectedItemPosition());
                 int pm = spinnerPrepareMinutes.getSelectedItemPosition() + 1;
                 int cm = spinnerCountdownMinutes.getSelectedItemPosition() + 2;
-                _FragmentBaseListener.getStateMachine().requestStart(cf, pm, cm);
+                _FragmentBaseListener.getStateMachine().requestStart(classFlag, pm, cm);
             }
         });
         super.onViewCreated(view, savedInstanceState);

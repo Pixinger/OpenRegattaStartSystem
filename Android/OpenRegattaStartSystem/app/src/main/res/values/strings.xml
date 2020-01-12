@@ -23,11 +23,15 @@
     <string-array name="spinnerItems_ClassFlag">
         <item>Offen</item>
         <item>Optimist</item>
+        <item>420er</item>
+        <item>Europe</item>
         <item>Ixylon</item>
+        <item>Laser</item>
+        <item>RS</item>
     </string-array>
     <string-array name="spinnerItems_PrepareTime">
         <item>1 Minute</item>
-        <item>2 Minuten</item>
+        <item>2 Minuten (regulär)</item>
         <item>3 Minuten</item>
         <item>4 Minuten</item>
         <item>5 Minuten</item>
@@ -40,7 +44,7 @@
     <string-array name="spinnerItems_CountdownTime">
         <item>2 Minuten</item>
         <item>3 Minuten</item>
-        <item>4 Minuten</item>
+        <item>4 Minuten (regulär)</item>
         <item>5 Minuten</item>
         <item>6 Minuten</item>
         <item>7 Minuten</item>
