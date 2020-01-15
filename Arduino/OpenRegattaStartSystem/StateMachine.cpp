@@ -120,7 +120,7 @@ bool StateMachine::AbortSingle()
 
 void StateMachine::GetCurrentStateAsJson(String& message)
 {
-  message += "\"ver\" : \"1\",";
+  message += "\"ver\" : \"2\","; // Specifiy network protocol version HERE!
   if (_pStateBase != NULL)
   {
 	  _pStateBase->GetStateAsJson(message);

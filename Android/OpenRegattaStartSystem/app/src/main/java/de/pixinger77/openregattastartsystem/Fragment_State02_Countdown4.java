@@ -24,7 +24,9 @@ public class Fragment_State02_Countdown4 extends Fragment_Base {
     private long startTick;
     private double startTime;
     private TextView txtTimer = null;
-    private Timer timer = null;
+    private Handler handler = null;
+    private ImageView imgClassFlag = null;
+    private ClassFlags currentClassFlag = ClassFlags.Unknown;
 
     public Fragment_State02_Countdown4() {
         // Required empty public constructor
@@ -43,9 +45,8 @@ public class Fragment_State02_Countdown4 extends Fragment_Base {
         txtTimer.setText("");
 
         // ClassFlag
-        ClassFlags selectedClassFlag = _FragmentBaseListener.getStateMachine().getSelectedClassFlag();
-        ImageView imgClassFlag = view.findViewById(R.id.imgClassFlag);
-        imgClassFlag.setImageResource(selectedClassFlag.getRessourceId());
+        imgClassFlag = view.findViewById(R.id.imgClassFlag);
+        imgClassFlag.setImageResource(currentClassFlag.getRessourceId());
 
         // btnAbort
         Button btnAbort = view.findViewById(R.id.btnAbort);
@@ -72,6 +73,20 @@ public class Fragment_State02_Countdown4 extends Fragment_Base {
         super.onViewCreated(view, savedInstanceState);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        _FragmentBaseListener.getStateMachine().requestStatus();
+    }
+
+    @Override
+    public void onPause() {
+        if (handler != null)
+            handler.removeCallbacksAndMessages(null);
+
+        super.onPause();
+    }
 
     @Override
     protected void OnUpdateStatus(NetworkHelper.Status status) {
@@ -79,41 +94,35 @@ public class Fragment_State02_Countdown4 extends Fragment_Base {
 
         startTime = castedStatus.getTime();
         startTick = SystemClock.uptimeMillis();
+        final ClassFlags updatedClassFlag = ClassFlags.valueOf(castedStatus.getClassFlagId());
 
-        if (timer != null)
-            timer.cancel();
-
-        //Declare the timer
-        timer = new Timer();
-        //Set the schedule function and rate
-        timer.scheduleAtFixedRate(
-                new TimerTask() {
-                    @Override
-                    public void run() {
-                        if (getActivity() != null) {
-                            getActivity().runOnUiThread(
-                                    new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            long currentTick = SystemClock.uptimeMillis();
-                                            long deltaTicks = currentTick - startTick;
-                                            double remainingTime = startTime - (deltaTicks / 1000.0f);
-                                            //remainingTime = Math.round(remainingTime * 10) / 10;
-                                            remainingTime = Math.round(remainingTime);
-                                            if (remainingTime > 0) {
-                                                txtTimer.setText(String.valueOf(remainingTime));
-                                            } else {
-                                                txtTimer.setText("0");
-                                                if ((_FragmentBaseListener != null) && (_FragmentBaseListener.getStateMachine() != null))
-                                                    _FragmentBaseListener.getStateMachine().requestStatus();
-                                            }
-                                        }
-                                    }
-                            );
-                        }
+        if (handler == null) {
+            // Start automatic UI Update for displaying the timer
+            handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (updatedClassFlag != currentClassFlag) {
+                        currentClassFlag = updatedClassFlag;
+                        imgClassFlag.setImageResource(currentClassFlag.getRessourceId());
                     }
-                },
-                0,
-                200);
+
+                    long currentTick = SystemClock.uptimeMillis();
+                    long deltaTicks = currentTick - startTick;
+                    double remainingTime = startTime - (deltaTicks / 1000.0f);
+                    //remainingTime = Math.round(remainingTime * 10) / 10;
+                    remainingTime = Math.round(remainingTime);
+                    if (remainingTime > 0) {
+                        txtTimer.setText(String.valueOf(remainingTime));
+                    } else {
+                        txtTimer.setText("0");
+                        if ((_FragmentBaseListener != null) && (_FragmentBaseListener.getStateMachine() != null))
+                            _FragmentBaseListener.getStateMachine().requestStatus();
+                    }
+
+                    handler.postDelayed(this, 200);
+                }
+            }, 200);
+        }
     }
 }

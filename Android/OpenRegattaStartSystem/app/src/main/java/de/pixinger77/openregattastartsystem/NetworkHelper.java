@@ -73,6 +73,18 @@ public class NetworkHelper {
         public double getTime() { return _time; }
     }
     // endregion
+    // region public class StatusPrepare extends Status
+    public abstract class StatusTimeClassFlag extends StatusTime {
+        private int _classFlagId;
+
+        public StatusTimeClassFlag(StateMachine.States state, double time, int classFlagId) {
+            super(state, time);
+            this._classFlagId = classFlagId;
+        }
+
+        public int getClassFlagId() { return _classFlagId; }
+    }
+    // endregion
 
     // region public class StatusSetup extends Status
     public class StatusSetup extends Status {
@@ -100,23 +112,23 @@ public class NetworkHelper {
 
     // endregion
     // region public class StatusPrepare extends StatusTime
-    public class StatusPrepare extends StatusTime {
-        public StatusPrepare(double time) {
-            super(StateMachine.States.State_01_Prepare, time);
+    public class StatusPrepare extends StatusTimeClassFlag {
+        public StatusPrepare(double time, int classFlagId) {
+            super(StateMachine.States.State_01_Prepare, time, classFlagId);
         }
     }
     // endregion
     // region public class StatusCountdown4 extends StatusTime
-    public class StatusCountdown4 extends StatusTime {
-        public StatusCountdown4(double time) {
-            super(StateMachine.States.State_02_Countdown4, time);
+    public class StatusCountdown4 extends StatusTimeClassFlag {
+        public StatusCountdown4(double time, int classFlagId) {
+            super(StateMachine.States.State_02_Countdown4, time, classFlagId);
         }
     }
     // endregion
     // region public class StatusCountdown1 extends StatusTime
-    public class StatusCountdown1 extends StatusTime {
-        public StatusCountdown1(double time) {
-            super(StateMachine.States.State_03_Countdown1, time);
+    public class StatusCountdown1 extends StatusTimeClassFlag {
+        public StatusCountdown1(double time, int classFlagId) {
+            super(StateMachine.States.State_03_Countdown1, time, classFlagId);
         }
     }
     // endregion
@@ -174,7 +186,7 @@ public class NetworkHelper {
                         try {
                             Log.d("PIX", jsonObject.toString());
                             int version = jsonObject.getInt("ver");
-                            if (version == 1) {
+                            if (version == 2) {
                                 String state = jsonObject.getString("state");
                                 if (state.equals("Setup")) {
                                     int classFlagId = jsonObject.getInt("cfid");
@@ -183,13 +195,16 @@ public class NetworkHelper {
                                     iRequestResult.OnRequestSucceeded(new NetworkHelper.StatusSetup(classFlagId, prepareMinutes, countdownMinutes));
                                 } else if (state.equals("Prepare")) {
                                     double time = jsonObject.getDouble("time");
-                                    iRequestResult.OnRequestSucceeded(new NetworkHelper.StatusPrepare(time));
+                                    int classFlagId = jsonObject.getInt("cfid");
+                                    iRequestResult.OnRequestSucceeded(new NetworkHelper.StatusPrepare(time, classFlagId));
                                 } else if (state.equals("Countdown4")) {
                                     double time = jsonObject.getDouble("time");
-                                    iRequestResult.OnRequestSucceeded(new NetworkHelper.StatusCountdown4(time));
+                                    int classFlagId = jsonObject.getInt("cfid");
+                                    iRequestResult.OnRequestSucceeded(new NetworkHelper.StatusCountdown4(time, classFlagId));
                                 } else if (state.equals("Countdown1")) {
                                     double time = jsonObject.getDouble("time");
-                                    iRequestResult.OnRequestSucceeded(new NetworkHelper.StatusCountdown1(time));
+                                    int classFlagId = jsonObject.getInt("cfid");
+                                    iRequestResult.OnRequestSucceeded(new NetworkHelper.StatusCountdown1(time, classFlagId));
                                 } else if (state.equals("Started")) {
                                     double time = jsonObject.getDouble("time");
                                     iRequestResult.OnRequestSucceeded(new NetworkHelper.StatusStarted(time));

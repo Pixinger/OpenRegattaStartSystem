@@ -24,8 +24,6 @@ public class StateMachine {
     }
     // endregion
 
-    private ClassFlags _SelectedClassFlag = ClassFlags.Open;
-
     private States currentState = States.Unknown;
     private Fragment_Base currentFragment = null;
     private FragmentManager fragmentManager;
@@ -152,7 +150,6 @@ public class StateMachine {
         this.networkHelper.RequestStart(classFlag.getValue(), prepareMinutes, countdownMinutes, new NetworkHelper.IRequestResult() {
             @Override
             public void OnRequestSucceeded() {
-                _SelectedClassFlag = classFlag;
                 SetState(States.State_01_Prepare);
             }
 
@@ -250,5 +247,4 @@ public class StateMachine {
             }
         });
     }
-    public ClassFlags getSelectedClassFlag() { return _SelectedClassFlag; }
 }

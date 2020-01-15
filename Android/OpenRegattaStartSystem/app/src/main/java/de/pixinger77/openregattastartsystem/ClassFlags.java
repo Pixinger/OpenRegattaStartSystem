@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum ClassFlags {
+    Unknown(-1),
     Open(0),
     Opti(1),
     Class420(2),
@@ -49,7 +50,7 @@ public enum ClassFlags {
             case 6:
                 return R.mipmap.ic_flag_class_rs;
             default:
-                return R.mipmap.ic_flag_class_open;
+                return R.drawable.ic_flag_class_unknown;
         }
     }
 }

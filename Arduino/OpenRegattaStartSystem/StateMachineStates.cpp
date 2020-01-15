@@ -42,6 +42,7 @@ EStates StateMachineState_Prepare::OnLoop()
 void StateMachineState_Prepare::OnGetStateAsJson(String& message)
 {
   message += "\"state\" : \"Prepare\",";
+  message += "\"cfid\" : \"";  message += _pSettings->getClassFlag();  message += "\",";
 
   unsigned long ms = millis();
   if (ms < _stopMillis)
@@ -78,6 +79,7 @@ EStates StateMachineState_Countdown4::OnLoop()
 void StateMachineState_Countdown4::OnGetStateAsJson(String& message)
 {
   message += "\"state\" : \"Countdown4\",";
+  message += "\"cfid\" : \"";  message += _pSettings->getClassFlag();  message += "\",";
 
   unsigned long ms = millis();
   if (ms < _stopMillis)
@@ -114,6 +116,7 @@ EStates StateMachineState_Countdown1::OnLoop()
 void StateMachineState_Countdown1::OnGetStateAsJson(String& message)
 {
   message += "\"state\" : \"Countdown1\",";
+  message += "\"cfid\" : \"";  message += _pSettings->getClassFlag();  message += "\",";
 
   unsigned long ms = millis();
   if (ms < _stopMillis)

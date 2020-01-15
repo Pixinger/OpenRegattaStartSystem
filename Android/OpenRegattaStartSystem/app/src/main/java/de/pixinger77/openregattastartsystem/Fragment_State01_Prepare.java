@@ -24,9 +24,9 @@ public class Fragment_State01_Prepare extends Fragment_Base {
     private long startTick;
     private double startTime;
     private TextView txtTimer = null;
-    private Timer timer = null;
     private Handler handler = null;
-    private Runnable runnableUiUpdate = null;
+    private ImageView imgClassFlag = null;
+    private ClassFlags currentClassFlag = ClassFlags.Unknown;
 
     public Fragment_State01_Prepare() {
         // Required empty public constructor
@@ -45,9 +45,8 @@ public class Fragment_State01_Prepare extends Fragment_Base {
         txtTimer.setText("");
 
         // ClassFlag
-        ClassFlags selectedClassFlag = _FragmentBaseListener.getStateMachine().getSelectedClassFlag();
-        ImageView imgClassFlag = view.findViewById(R.id.imgClassFlag);
-        imgClassFlag.setImageResource(selectedClassFlag.getRessourceId());
+        imgClassFlag = view.findViewById(R.id.imgClassFlag);
+        imgClassFlag.setImageResource(currentClassFlag.getRessourceId());
 
         // btnAbort
         Button btnAbort = view.findViewById(R.id.btnAbort);
@@ -95,6 +94,7 @@ public class Fragment_State01_Prepare extends Fragment_Base {
 
         startTime = castedStatus.getTime();
         startTick = SystemClock.uptimeMillis();
+        final ClassFlags updatedClassFlag = ClassFlags.valueOf(castedStatus.getClassFlagId());
 
         if (handler == null) {
             // Start automatic UI Update for displaying the timer
@@ -102,6 +102,11 @@ public class Fragment_State01_Prepare extends Fragment_Base {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    if (updatedClassFlag != currentClassFlag) {
+                        currentClassFlag = updatedClassFlag;
+                        imgClassFlag.setImageResource(currentClassFlag.getRessourceId());
+                    }
+
                     long currentTick = SystemClock.uptimeMillis();
                     long deltaTicks = currentTick - startTick;
                     double remainingTime = startTime - (deltaTicks / 1000.0f);
