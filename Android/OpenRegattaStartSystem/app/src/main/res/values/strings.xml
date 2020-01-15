@@ -9,7 +9,7 @@
     <string name="Time">Zeit</string>
     <string name="Start">Start</string>
     <string name="Started">Gestartet</string>
-    <string name="Disconnected">Verbindung getrennt</string>
+    <string name="Disconnected">Verbindung getrennt (Version 1.0.3)</string>
     <string name="SearchingStartMachine">Suche Start-Automat (bitte warten...)</string>
     <string name="Connect">Verbinden</string>
     <string name="Reset">Zurücksetzen</string>

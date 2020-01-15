@@ -17,9 +17,9 @@ void StateMachineState_Setup::OnGetStateAsJson(String& message)
 {
   DEBUGLOGLN("StateMachineState_Setup: ");
   message += "\"state\" : \"Setup\",";
-  message += "\"cfid\" : \"0\",";
-  message += "\"pmin\" : \"1\",";
-  message += "\"cmin\" : \"4\"";
+  message += "\"cfid\" : \"";  message += _pSettings->getClassFlag();  message += "\",";
+  message += "\"pmin\" : \"";  message += _pSettings->getPrepareMinutes();  message += "\",";
+  message += "\"cmin\" : \"";  message += _pSettings->getCountdownMinutes();  message += "\"";
 }
 
 

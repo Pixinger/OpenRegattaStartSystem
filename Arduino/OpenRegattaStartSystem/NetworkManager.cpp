@@ -98,78 +98,6 @@ void NetworkManager::Respond_BadRequest(const char* response_message)
   DEBUGLOGLN("- Respond_BadRequest");
 }
 
-bool NetworkManager::ProcessRequest_Start(String & request)
-{/*
-  // Check if length is OK
-  if (request.length() < 11)
-  {
-    DEBUGLOGLN("Error: length < 11");
-    return false;      
-  }
-  
-  // Check if '/' is at 10th position
-  char c = request.charAt(10);
-  if (c == '/')
-  {
-  }
-  else
-  {
-    WARNLOGLN("Error: Invalid char at position 10");
-    return false;      
-  }
-  
-  // ClassFlagId
-  int index1 = 11;      
-  int index2 = request.indexOf("/", index1);
-  if (index2 == -1)
-  {
-    WARNLOGLN("Error: ClassFlagId '/' index");
-    return false;      
-  }
-  String sClassFlagId = request.substring(index1, index2);
-  int iClassFlagId = sClassFlagId.toInt();      
-  if ((iClassFlagId < 0) || (iClassFlagId > 0))
-  {
-    WARNLOGLN("Error: iClassFlagId out of range");
-    return false;      
-  }
-  
-  // PrepareMinutes
-  index1 = index2 + 1;
-  index2 = request.indexOf("/", index1);
-  if (index2 == -1)
-  {
-    WARNLOGLN("Error: PrepareMinutes '/' index");
-    return false;      
-  }
-  String sPrepareMinutes = request.substring(index1, index2);
-  int iPrepareMinutes = sPrepareMinutes.toInt();      
-  if ((iPrepareMinutes < 1) || (iPrepareMinutes > 10))
-  {
-    WARNLOGLN("Error: iPrepareMinutes out of range");
-    return false;      
-  }
-  
-  // CountdownMinutes
-  index1 = index2 + 1;
-  index2 = request.indexOf(" ", index1);
-  if (index2 == -1)
-  {
-    WARNLOGLN("Error: CountdownMinutes '/' index");
-    return false;      
-  }
-  String sCountdownMinutes = request.substring(index1, index2);
-  int iCountdownMinutes = sCountdownMinutes.toInt();      
-  if ((iCountdownMinutes < 1) || (iCountdownMinutes > 10))
-  {
-    WARNLOGLN("Error: iCountdownMinutes out of range");
-    return false;      
-  }
-  
-  DEBUGLOG("iClassFlagId: ");DEBUGLOG(iClassFlagId); DEBUGLOG(" iPrepareMinutes: ");DEBUGLOG(iPrepareMinutes); DEBUGLOG(" iCountdownMinutes: ");DEBUGLOGLN(iCountdownMinutes);
-  return _pStateMachine->Start(iClassFlagId, iPrepareMinutes, iCountdownMinutes);*/
-  return true;
-}
 
 
 void NetworkManager::OnHandleRoot()
@@ -216,7 +144,7 @@ void NetworkManager::OnHandleStart()
     return;
   }
   int iClassFlagId = cf.toInt();      
-  if ((iClassFlagId < 0) || (iClassFlagId > 0))
+  if (iClassFlagId < 0) // || (iClassFlagId > 6)): we do not test the upper limit. This will be checked in the Settings class and corrected automatically
   {
     WARNLOGLN("Error: iClassFlagId out of range");
     Respond_BadRequest();
@@ -239,7 +167,7 @@ void NetworkManager::OnHandleStart()
     return;
   }
   int iPrepareMinutes = pm.toInt();      
-  if ((iPrepareMinutes < 1) || (iPrepareMinutes > 10))
+  if (iPrepareMinutes < 1) // || (iPrepareMinutes > 10)): we do not test the upper limit. This will be checked in the Settings class and corrected automatically
   {
     WARNLOGLN("Error: iPrepareMinutes out of range");
     Respond_BadRequest();
@@ -262,7 +190,7 @@ void NetworkManager::OnHandleStart()
     return;
   }
   int iCountdownMinutes = cm.toInt();      
-  if ((iCountdownMinutes < 1) || (iCountdownMinutes > 10))
+  if (iCountdownMinutes < 1) // || (iCountdownMinutes > 10)): we do not test the upper limit. This will be checked in the Settings class and corrected automatically
   {
     WARNLOGLN("Error: iCountdownMinutes out of range");
     Respond_BadRequest();

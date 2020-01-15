@@ -13,9 +13,9 @@ private:
   int _CountdownMinutes;
 public:
   Settings()
-    :_ClassFlag(0)
-    ,_PrepareMinutes(1)
-    ,_CountdownMinutes(4)
+    :_ClassFlag(1) // Define the PRESET here!
+    ,_PrepareMinutes(2) // Define the PRESET here!
+    ,_CountdownMinutes(4) // Define the PRESET here!
     {}  
 public:
   void Save() {};
@@ -24,9 +24,11 @@ public:
   void setClassFlag(int classFlag) 
   { 
     _ClassFlag = 0;
-    //if (classFlag != 0) 
-    //  classFlag = 0;
-    //_ClassFlag = classFlag;
+    if (classFlag < 0) 
+      classFlag = 0;
+    if (classFlag > 6) 
+      classFlag = 6;
+    _ClassFlag = classFlag;
   };
   int getClassFlag() 
   { 

@@ -28,8 +28,6 @@ public:
   void Setup(StateMachine* pStateMachine);
   void Loop();
 private:
-  bool ProcessRequest_Start(String & request);
-private:
   void Respond_Code(int code, const char* reason, const char* response_message = NULL);
   void Respond_OK();
   void Respond_BadRequest(const char* response_message = NULL);
